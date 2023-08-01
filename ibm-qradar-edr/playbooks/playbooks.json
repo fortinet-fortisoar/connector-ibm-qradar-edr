@@ -1,0 +1,341 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "3a18e7ca-5eea-4036-8031-2a1c0cadcab4",
+      "@type": "WorkflowCollection",
+      "name": "Sample - IBM QRadar EDR - 1.0.0",
+      "description": "IBM Security QRadar EDR, formerly ReaQta, remediates known and unknown endpoint threats in near real time with easy-to-use intelligent automation that requires little-to-no human interaction. ",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "Ibm",
+        "ibm-qradar-edr"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "cf19bf9b-59b7-473f-8a7b-92c2a0de3813",
+          "collection": "/api/3/workflow_collections/3a18e7ca-5eea-4036-8031-2a1c0cadcab4",
+          "triggerLimit": null,
+          "description": "This action is used to retrieve all alerts generated in ReaQta Hive.",
+          "name": "Get Alert List",
+          "tag": "#IBM QRadar EDR",
+          "recordTags": [
+            "Ibm",
+            "ibm-qradar-edr"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/144ff348-8d67-4fab-a84f-bc176ec914a0",
+          "steps": [
+            {
+              "uuid": "144ff348-8d67-4fab-a84f-bc176ec914a0",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "0ad2e4cd-1e30-429d-ad54-daab90acd5a3",
+                "title": "IBM QRadar EDR: Get Alert List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "265d16dc-c444-4407-af7a-2a73812cf7b6",
+              "@type": "WorkflowStep",
+              "name": "Get Alert List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "IBM QRadar EDR",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "ibm-qradar-edr",
+                "operation": "get_alert_list",
+                "operationTitle": "Get Alert List",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "86bcb269-4e46-4fa9-89b7-d3c806cfb0e7",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Alert List",
+              "sourceStep": "/api/3/workflow_steps/144ff348-8d67-4fab-a84f-bc176ec914a0",
+              "targetStep": "/api/3/workflow_steps/265d16dc-c444-4407-af7a-2a73812cf7b6"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "4b099b6c-d2eb-4c79-bb86-5b5f31a280cd",
+          "collection": "/api/3/workflow_collections/3a18e7ca-5eea-4036-8031-2a1c0cadcab4",
+          "triggerLimit": null,
+          "description": "This action is used to close an existing alert.",
+          "name": "Close Alert By ID",
+          "tag": "#IBM QRadar EDR",
+          "recordTags": [
+            "Ibm",
+            "ibm-qradar-edr"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/7b5b23e7-617c-4583-a694-49ea28550030",
+          "steps": [
+            {
+              "uuid": "7b5b23e7-617c-4583-a694-49ea28550030",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "61bde3d8-6dda-43a0-bc4f-d7d85b1ca9d4",
+                "title": "IBM QRadar EDR: Close Alert By ID",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "08e0d135-af3a-47ba-839e-5f5e77427511",
+              "@type": "WorkflowStep",
+              "name": "Close Alert By ID",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "IBM QRadar EDR",
+                "config": "''",
+                "params": {
+                  "malicious": false
+                },
+                "version": "1.0.0",
+                "connector": "ibm-qradar-edr",
+                "operation": "close_alert_by_id",
+                "operationTitle": "Close Alert By ID",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b094863b-612b-4568-a311-2ec7b0113584",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Close Alert By ID",
+              "sourceStep": "/api/3/workflow_steps/7b5b23e7-617c-4583-a694-49ea28550030",
+              "targetStep": "/api/3/workflow_steps/08e0d135-af3a-47ba-839e-5f5e77427511"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "8e62b936-c89e-46d9-ad6e-43cbb175a68e",
+          "collection": "/api/3/workflow_collections/3a18e7ca-5eea-4036-8031-2a1c0cadcab4",
+          "triggerLimit": null,
+          "description": "This action is used to retrieve details of a particular alert.",
+          "name": "Get Alert By ID",
+          "tag": "#IBM QRadar EDR",
+          "recordTags": [
+            "Ibm",
+            "ibm-qradar-edr"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d4e8ef84-022f-445b-9624-c88c116b3b32",
+          "steps": [
+            {
+              "uuid": "d4e8ef84-022f-445b-9624-c88c116b3b32",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "9e713021-a37f-4abc-a9f9-5f3e2892d8a2",
+                "title": "IBM QRadar EDR: Get Alert By ID",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "48f63915-8697-4e7d-ac8e-008187f99c3e",
+              "@type": "WorkflowStep",
+              "name": "Get Alert By ID",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "IBM QRadar EDR",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "ibm-qradar-edr",
+                "operation": "get_alert_by_id",
+                "operationTitle": "Get Alert By ID",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b913f298-6f88-4a97-b718-33297b3bf49e",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Alert By ID",
+              "sourceStep": "/api/3/workflow_steps/d4e8ef84-022f-445b-9624-c88c116b3b32",
+              "targetStep": "/api/3/workflow_steps/48f63915-8697-4e7d-ac8e-008187f99c3e"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "7545d949-615a-440c-8928-64529274a78a",
+          "collection": "/api/3/workflow_collections/3a18e7ca-5eea-4036-8031-2a1c0cadcab4",
+          "triggerLimit": null,
+          "description": "This action is used to retrieve details of an alert using LocalID generated by associated endpoint.",
+          "name": "Get Alert By Alert Local ID",
+          "tag": "#IBM QRadar EDR",
+          "recordTags": [
+            "Ibm",
+            "ibm-qradar-edr"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/413ad635-606d-461d-8870-9c210c602a1b",
+          "steps": [
+            {
+              "uuid": "413ad635-606d-461d-8870-9c210c602a1b",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "c031c332-247b-419c-8a8b-ce0fb3833edf",
+                "title": "IBM QRadar EDR: Get Alert By Alert Local ID",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "a595a9f4-50df-406c-a8ee-5130906788be",
+              "@type": "WorkflowStep",
+              "name": "Get Alert By Alert Local ID",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "IBM QRadar EDR",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "ibm-qradar-edr",
+                "operation": "get_alert_by_alert_local_id",
+                "operationTitle": "Get Alert By Alert Local ID",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d1fb2087-39f0-4e93-ad7d-5988ce40ff41",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Alert By Alert Local ID",
+              "sourceStep": "/api/3/workflow_steps/413ad635-606d-461d-8870-9c210c602a1b",
+              "targetStep": "/api/3/workflow_steps/a595a9f4-50df-406c-a8ee-5130906788be"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
