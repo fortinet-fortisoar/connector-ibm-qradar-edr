@@ -7,7 +7,7 @@
 from connectors.core.connector import get_logger, ConnectorError
 from .token_generation import *
 
-logger = get_logger('ibm-qradar-edr')
+logger = get_logger('ibm-security-qradar-edr')
 
 TRIGGER_CONDITION = {
     'Code Injection': 0,

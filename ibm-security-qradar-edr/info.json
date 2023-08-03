@@ -1,14 +1,14 @@
 {
-  "name": "ibm-qradar-edr",
-  "label": "IBM QRadar EDR",
+  "name": "ibm-security-qradar-edr",
+  "label": "IBM Security QRadar EDR",
   "version": "1.0.0",
   "description": "IBM Security QRadar EDR, formerly ReaQta, remediates known and unknown endpoint threats in near real time with easy-to-use intelligent automation that requires little-to-no human interaction. ",
   "publisher": "Fortinet",
   "cs_approved": false,
   "cs_compatible": true,
   "category": "Endpoint Security",
-  "icon_small_name": "",
-  "icon_large_name": "",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
   "help_online": "",
   "configuration": {
     "fields": [
@@ -23,24 +23,24 @@
         "placeholder": "https://<Hive Server URL>"
       },
       {
-        "name": "secret_key",
-        "title": "Secret Key",
-        "type": "text",
-        "editable": true,
-        "visible": true,
-        "required": true,
-        "tooltip": "Specify the Secret Key of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259",
-        "description": "Specify the Secret Key of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259"
-      },
-      {
         "name": "app_id",
         "title": "App ID",
-        "type": "password",
+        "type": "text",
         "editable": true,
         "visible": true,
         "required": true,
         "tooltip": "Specify the App ID of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259",
         "description": "Specify the App ID of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259"
+      },
+        {
+        "name": "secret_key",
+        "title": "Secret Key",
+        "type": "password",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "tooltip": "Specify the Secret Key of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259",
+        "description": "Specify the Secret Key of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259"
       },
       {
         "name": "verify_ssl",
@@ -59,7 +59,7 @@
       "operation": "get_alert_list",
       "title": "Get Alert List",
       "annotation": "get_alert_list",
-      "description": "This action is used to retrieve all alerts generated in ReaQta Hive.",
+      "description": "This action is used to retrieve all alerts generated in QRadar EDR",
       "category": "investigation",
       "visible": true,
       "enabled": true,

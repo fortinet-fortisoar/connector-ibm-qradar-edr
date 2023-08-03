@@ -10,7 +10,7 @@ from datetime import datetime
 from connectors.core.connector import get_logger, ConnectorError
 from connectors.core.utils import update_connnector_config
 
-logger = get_logger('ibm-qradar-edr')
+logger = get_logger('ibm-security-qradar-edr')
 
 
 class QRadarEDR:

@@ -8,7 +8,7 @@ from connectors.core.connector import Connector, get_logger, ConnectorError
 from .operations import operations
 from .token_generation import check
 
-logger = get_logger('ibm-qradar-edr')
+logger = get_logger('ibm-security-qradar-edr')
 
 
 class QRadarEDR(Connector):
