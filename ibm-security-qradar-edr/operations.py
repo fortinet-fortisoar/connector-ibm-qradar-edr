@@ -92,7 +92,7 @@ def build_payload(params):
                 data[k] = v.lower()
             else:
                 data[k] = v
-    logger.error('data ------->{}'.format(data))
+    logger.debug('data ------->{}'.format(data))
     return data
 
 
