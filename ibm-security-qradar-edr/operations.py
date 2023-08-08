@@ -26,11 +26,14 @@ TRIGGER_CONDITION = {
     'Antimalware Detection': 13
 }
 
+PARA_LIST = ['id', 'endpointId', 'triggerCondition', 'tag', 'severity', 'status', 'gid', 'country', 'processPid', 'eventType', 'mitreTechnique']
 
-def api_request(method, endpoint, connector_info, config, params=None, data=None):
+
+def api_request(method, endpoint, connector_info, config, params=None, data=None, link=None):
     try:
         qr = QRadarEDR(config)
-        endpoint = qr.server_url + "/rqt-api/1/" + endpoint
+        if not link:
+            endpoint = qr.server_url + "/rqt-api/1/" + endpoint
         token = qr.validate_token(config, connector_info)
         headers = {
             'ContentType': 'application/json',
@@ -44,7 +47,7 @@ def api_request(method, endpoint, connector_info, config, params=None, data=None
             else:
                 if response.text != "":
                     err_resp = response.json()
-                    failure_msg = err_resp['error']['message']
+                    failure_msg = err_resp['message']
                     error_msg = 'Response [{0}:{1} Details: {2}]'.format(response.status_code, response.reason,
                                                                          failure_msg if failure_msg else '')
                 else:
@@ -77,19 +80,46 @@ def make_list_value_params(key, value):
     return [x.strip() for x in str(value).split(",")]
 
 
-def get_alert_list(config, params, connector_info):
+def build_payload(params):
     data = {}
     for k, v in params.items():
         if v:
-            if k in ['id', 'endpointId', 'triggerCondition', 'tag', 'severity', 'status', 'country', 'gid']:
+            if k in PARA_LIST:
                 data[k] = make_list_value_params(k, v)
-            if k in ['severity', 'status']:
-                data[k] = [x.lower() for x in data[k]]
+                if k in ['severity', 'status']:
+                    data[k] = [x.lower() for x in data[k]]
             elif k == 'activityState':
                 data[k] = v.lower()
             else:
                 data[k] = v
-    response = api_request("GET", "alerts", connector_info, config, params=data)
+    logger.error('data ------->{}'.format(data))
+    return data
+
+
+def fetch_all_records(response, connector_info, config):
+    result = response
+    while response.get('nextPage') and response.get('remainingItems'):
+        response = api_request("GET", response.get('nextPage'), connector_info, config, link=True)
+        result['result'].extend(response['result'])
+    result.update({'nextPage': '', 'remainingItems': 0})
+    return result
+
+
+def get_alert_list(config, params, connector_info):
+    params = build_payload(params)
+    get_all_records = params.pop('get_all_records', None)
+    response = api_request("GET", "alerts", connector_info, config, params=params)
+    if get_all_records:
+        return fetch_all_records(response, connector_info, config)
+    return response
+
+
+def get_events_related_to_alerts(config, params, connector_info):
+    params = build_payload(params)
+    get_all_records = params.pop('get_all_records', None)
+    response = api_request("GET", f"alert/{params.pop('alert_id')}/events", connector_info, config, params=params)
+    if get_all_records:
+        return fetch_all_records(response, connector_info, config)
     return response
 
 
@@ -103,9 +133,8 @@ def close_alert_by_id(config, params, connector_info):
     return response
 
 
-def get_alert_by_alert_local_id(config, params, connector_info):
-    response = api_request("GET", f"alert/{params.get('alert_local_id')}/endpoint/{params.get('endpoint_id')}",
-                           connector_info, config)
+def add_notes_to_alert(config, params, connector_info):
+    response = api_request("PUT", f"alert/{params.pop('alert_id')}/notes", connector_info, config, data=params)
     return response
 
 
@@ -120,7 +149,8 @@ def _check_health(config, connector_info):
 
 operations = {
     'get_alert_list': get_alert_list,
+    'get_events_related_to_alerts': get_events_related_to_alerts,
     'get_alert_by_id': get_alert_by_id,
     'close_alert_by_id': close_alert_by_id,
-    'get_alert_by_alert_local_id': get_alert_by_alert_local_id
+    'add_notes_to_alert': add_notes_to_alert
 }

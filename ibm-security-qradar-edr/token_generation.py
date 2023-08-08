@@ -4,7 +4,6 @@
   FORTINET CONFIDENTIAL & FORTINET PROPRIETARY SOURCE CODE
   Copyright end """
 
-import json
 from requests import request, exceptions as req_exceptions
 from datetime import datetime
 from connectors.core.connector import get_logger, ConnectorError
@@ -30,7 +29,7 @@ class QRadarEDR:
             headers = {
                 "ContentType": 'application/json'
             }
-            response = request("POST", url=url, data=json.dumps(data), headers=headers, verify=self.verify_ssl)
+            response = request("POST", url=url, data=data, headers=headers, verify=self.verify_ssl)
             if response.ok:
                 return response.json()
             else:
