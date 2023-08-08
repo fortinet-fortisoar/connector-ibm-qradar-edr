@@ -1,0 +1,896 @@
+{
+  "name": "ibm-security-qradar-edr",
+  "label": "IBM Security QRadar EDR",
+  "version": "1.0.0",
+  "description": "IBM Security QRadar EDR, formerly ReaQta, remediates known and unknown endpoint threats in near real time with easy-to-use intelligent automation that requires little-to-no human interaction. ",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "category": "Endpoint Security",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "configuration": {
+    "fields": [
+      {
+        "name": "server_url",
+        "title": "Server URL",
+        "type": "text",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "Specify the Hive server URL to which you will connect and perform the automated operations.",
+        "placeholder": "https://<Hive Server URL>"
+      },
+      {
+        "name": "app_id",
+        "title": "App ID",
+        "type": "text",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "tooltip": "Specify the App ID of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259",
+        "description": "Specify the App ID of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259"
+      },
+      {
+        "name": "secret_key",
+        "title": "Secret Key",
+        "type": "password",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "tooltip": "Specify the Secret Key of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259",
+        "description": "Specify the Secret Key of the API Application already created in the Hive Server. For more information refer https://www.ibm.com/support/pages/node/6568259"
+      },
+      {
+        "name": "verify_ssl",
+        "title": "Verify SSL",
+        "type": "checkbox",
+        "editable": true,
+        "visible": true,
+        "required": false,
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. \nBy default, this option is set as True. "
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_alert_list",
+      "title": "Get Alert List",
+      "annotation": "get_alert_list",
+      "description": "This action is used to retrieve all alerts generated in QRadar EDR",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "id",
+          "title": "Alert ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify the IDs of the alerts to be retrieved, you can specify multiple IDs as comma separated values",
+          "description": "Specify the IDs of the alerts to be retrieved, you can specify multiple IDs as comma separated values"
+        },
+        {
+          "name": "endpointId",
+          "title": "Endpoint ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify the IDs of the endpoints where the alert was generated, you can specify multiple IDs as comma separated values",
+          "description": "Specify the IDs of the endpoints where the alert was generated, you can specify multiple IDs as comma separated values"
+        },
+        {
+          "name": "triggerCondition",
+          "title": "Trigger Condition",
+          "type": "multiselect",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "options": [
+            "Code Injection",
+            "Process Impersonated",
+            "Signature Forged",
+            "Incident Correlated",
+            "DLL Sideloaded",
+            "Suspicious Script Executed",
+            "Policies Triggered",
+            "Anomalous Behavior Detected",
+            "Token Stolen",
+            "Ransomware Behavior Detected",
+            "Privilege Escalated",
+            "External Trigger",
+            "Detection Strategy",
+            "Antimalware Detection"
+          ],
+          "tooltip": "Select the trigger condition of the alert",
+          "description": "Select the trigger condition of the alert"
+        },
+        {
+          "name": "tag",
+          "title": "Tag",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify tags based on which you want to filter alerts, you can specify multiple tags as comma separated values",
+          "description": "Specify tags based on which you want to filter alerts, you can specify multiple tags as comma separated values"
+        },
+        {
+          "name": "activityState",
+          "title": "Activity State",
+          "type": "select",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "options": [
+            "Active",
+            "Idle",
+            "Inactive",
+            "Archived"
+          ],
+          "tooltip": "Select the activity state based on which you want to filter alerts",
+          "description": "Select the activity state based on which you want to filter alerts"
+        },
+        {
+          "name": "severity",
+          "title": "Severity",
+          "type": "multiselect",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "options": [
+            "Safe",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "tooltip": "Select the severity based on which you want to filter alerts",
+          "description": "Select the severity based on which you want to filter alerts"
+        },
+        {
+          "name": "status",
+          "title": "Status",
+          "type": "multiselect",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "options": [
+            "Malicious",
+            "Benign",
+            "None"
+          ],
+          "tooltip": "Select the status based on which you want to filter alerts",
+          "description": "Select the status based on which you want to filter alerts"
+        },
+        {
+          "name": "happenedAfter",
+          "title": "Happened After",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the alert happened after the provided date",
+          "description": "Fetches the alert happened after the provided date"
+        },
+        {
+          "name": "happenedBefore",
+          "title": "Happened Before",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the alert happened before the provided date",
+          "description": "Fetches the alert happened before the provided date"
+        },
+        {
+          "name": "receivedAfter",
+          "title": "Received After",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the alert received after the provided date",
+          "description": "Fetches the alert received after the provided date"
+        },
+        {
+          "name": "receivedBefore",
+          "title": "Received Before",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the alert received before the provided date",
+          "description": "Fetches the alert received before the provided date"
+        },
+        {
+          "name": "closedAfter",
+          "title": "Closed After",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the alert closed after the provided date",
+          "description": "Fetches the alert closed after the provided date"
+        },
+        {
+          "name": "closedBefore",
+          "title": "Closed Before",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the alert closed before the provided date",
+          "description": "Fetches the alert closed before the provided date"
+        },
+        {
+          "name": "lastChangedAfter",
+          "title": "Last Changed After",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the alert that has been changed last after the given date",
+          "description": "Fetches the alert that has been changed last after the given date"
+        },
+        {
+          "name": "lastChangedBefore",
+          "title": "Last Changed Before",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the alert that has been changed last before the given date",
+          "description": "Fetches the alert that has been changed last before the given date"
+        },
+        {
+          "name": "country",
+          "title": "Country",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filters the alerts that contains connection events to the given countries. Use lowercased alpha-2 country codes, e.g., \"it\" for Italy. You can specify multiple country as comma separated values",
+          "description": "Filters the alerts that contains connection events to the given countries. Use lowercased alpha-2 country codes, e.g., \"it\" for Italy. You can specify multiple country as comma separated values"
+        },
+        {
+          "name": "gid",
+          "title": "Group ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify group IDs to which the endpoint on which the alert was generated belongs, you can specify multiple group IDs as comma separated values",
+          "description": "Specify group IDs to which the endpoint on which the alert was generated belongs, you can specify multiple group IDs as comma separated values"
+        },
+        {
+          "name": "count",
+          "title": "Count",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify the number of alerts to return in a single page",
+          "description": "Specify the number of alerts to return in a single page"
+        },
+        {
+          "name": "lastSeenId",
+          "title": "Last Seen ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "This automatically sorts alerts by id in ascending order and returns those with an id strictly greater than the provided one.",
+          "description": "This automatically sorts alerts by id in ascending order and returns those with an id strictly greater than the provided one."
+        },
+        {
+          "name": "get_all_records",
+          "title": "Get All Records",
+          "type": "checkbox",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": true,
+          "tooltip": "If checked, it fetches all the records present, By default this is set to true",
+          "description": "If checked, it fetches all the records present, By default this is set to true"
+        }
+      ],
+      "output_schema": {
+        "result": [
+          {
+            "id": "",
+            "localId": "",
+            "endpointId": "",
+            "triggerCondition": "",
+            "endpoint": {
+              "id": "",
+              "machineId": "",
+              "osType": "",
+              "cpuVendor": "",
+              "arch": "",
+              "cpuDescr": "",
+              "kernel": "",
+              "os": "",
+              "name": "",
+              "domain": "",
+              "state": "",
+              "registrationTime": "",
+              "deregistrationTime": "",
+              "agentVersion": "",
+              "componentsVersions": [
+                {
+                  "name": "",
+                  "version": "",
+                  "build": ""
+                }
+              ],
+              "isVirtualMachine": "",
+              "isDomainController": "",
+              "isServer": "",
+              "sessionStart": "",
+              "sessionEnd": "",
+              "lastSeenAt": "",
+              "disconnectionReason": "",
+              "localAddr": "",
+              "hvStatus": "",
+              "macs": [],
+              "isolated": "",
+              "connected": "",
+              "tags": [],
+              "groups": [
+                {
+                  "id": "",
+                  "name": "",
+                  "description": "",
+                  "parentGroupId": ""
+                }
+              ],
+              "avInstalled": "",
+              "avOnline": "",
+              "avDbLatestUpdateTime": "",
+              "avDbSignaturesNum": "",
+              "avAgentVersion": ""
+            },
+            "triggerEvents": [
+              {
+                "id": "",
+                "category": "",
+                "localId": "",
+                "endpointId": "",
+                "receivedAt": "",
+                "happenedAt": "",
+                "relevance": "",
+                "severity": "",
+                "trigger": "",
+                "manuallyAdded": "",
+                "process": {
+                  "id": "",
+                  "parentId": "",
+                  "endpointId": "",
+                  "program": {
+                    "path": "",
+                    "filename": "",
+                    "md5": "",
+                    "sha1": "",
+                    "sha256": "",
+                    "certInfo": {
+                      "signer": "",
+                      "issuer": "",
+                      "trusted": "",
+                      "expired": ""
+                    },
+                    "size": "",
+                    "arch": "",
+                    "fsName": ""
+                  },
+                  "user": "",
+                  "pid": "",
+                  "startTime": "",
+                  "ppid": "",
+                  "pstartTime": "",
+                  "userSID": "",
+                  "privilegeLevel": "",
+                  "noGui": "",
+                  "logonId": ""
+                },
+                "eventType": "",
+                "data": {
+                  "additionalProp1": "",
+                  "additionalProp2": "",
+                  "additionalProp3": ""
+                }
+              }
+            ],
+            "totalEventCount": "",
+            "byTypeEventCount": [
+              {
+                "type": "",
+                "count": ""
+              }
+            ],
+            "impact": "",
+            "severity": "",
+            "closed": "",
+            "closedAt": "",
+            "activityState": "",
+            "terminationReason": "",
+            "receivedAt": "",
+            "happenedAt": "",
+            "tags": [],
+            "notes": "",
+            "endpointState": {
+              "osType": "",
+              "cpuVendor": "",
+              "arch": "",
+              "cpuDescr": "",
+              "kernel": "",
+              "os": "",
+              "hvStatus": "",
+              "name": "",
+              "domain": "",
+              "isolated": "",
+              "localAddr": "",
+              "macs": [],
+              "componentsVersions": [
+                {
+                  "name": "",
+                  "version": "",
+                  "build": ""
+                }
+              ],
+              "endpointVersion": "",
+              "tags": [],
+              "groups": [
+                {
+                  "id": "",
+                  "name": "",
+                  "description": "",
+                  "parentGroupId": ""
+                }
+              ]
+            },
+            "alertStatus": "",
+            "title": ""
+          }
+        ],
+        "nextPage": "",
+        "remainingItems": ""
+      }
+    },
+    {
+      "operation": "get_events_related_to_alerts",
+      "title": "Get Events Related To Alerts",
+      "annotation": "get_events_related_to_alerts",
+      "description": "This action is used to retrieve all events related to alerts generated in QRadar EDR",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "alert_id",
+          "title": "Alert ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Specify the ID of the alerts whose events to be retrieved.",
+          "description": "Specify the ID of the alerts whose events to be retrieved."
+        },
+        {
+          "name": "processId",
+          "title": "Process ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify the process ID to filter events",
+          "description": "Specify the process ID to filter events"
+        },
+        {
+          "name": "processPid",
+          "title": "Process PID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify the process PID to filter events, you can specify multiple process PID as comma separated values",
+          "description": "Specify the process PID to filter events, you can specify multiple process PID as comma separated values"
+        },
+        {
+          "name": "eventType",
+          "title": "Event Type",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify events type based on which you want to filter events, you can specify multiple events types as comma separated values",
+          "description": "Specify events type based on which you want to filter events, you can specify multiple events types as comma separated values"
+        },
+        {
+          "name": "severity",
+          "title": "Severity",
+          "type": "multiselect",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "options": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "tooltip": "Select the severity based on which you want to filter events",
+          "description": "Select the severity based on which you want to filter events"
+        },
+        {
+          "name": "happenedAfter",
+          "title": "Happened After",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the events happened after the provided date",
+          "description": "Fetches the events happened after the provided date"
+        },
+        {
+          "name": "happenedBefore",
+          "title": "Happened Before",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Fetches the events happened before the provided date",
+          "description": "Fetches the events happened before the provided date"
+        },
+        {
+          "name": "country",
+          "title": "Country",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filters the events that have the specified country code. Use lowercased alpha-2 country codes, e.g., \"it\" for Italy. You can specify multiple country as comma separated values",
+          "description": "Filters the events that have the specified country code. Use lowercased alpha-2 country codes, e.g., \"it\" for Italy. You can specify multiple country as comma separated values"
+        },
+        {
+          "name": "mitreTechnique",
+          "title": "Mitre Technique",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filters the events that have the specified mitre technique.You can specify multiple mitre technique as comma separated values",
+          "description": "Filters the events that have the specified mitre technique.You can specify multiple mitre technique as comma separated values"
+        },
+        {
+          "name": "gid",
+          "title": "Group ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify group ID to return events if the alert belongs to an endpoint that is in the group with the given id. , you can specify multiple group IDs as comma separated values",
+          "description": "Specify group ID to return events if the alert belongs to an endpoint that is in the group with the given id. , you can specify multiple group IDs as comma separated values"
+        },
+        {
+          "name": "get_all_records",
+          "title": "Get All Records",
+          "type": "checkbox",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": true,
+          "tooltip": "If checked, it fetches all the records present, By default this is set to true",
+          "description": "If checked, it fetches all the records present, By default this is set to true"
+        }
+      ],
+      "output_schema": {
+        "result": [
+          {
+            "id": "",
+            "category": "",
+            "localId": "",
+            "endpointId": "",
+            "receivedAt": "",
+            "happenedAt": "",
+            "relevance": "",
+            "severity": "",
+            "trigger": "",
+            "manuallyAdded": "",
+            "process": {
+              "id": "",
+              "parentId": "",
+              "endpointId": "",
+              "program": {
+                "path": "",
+                "filename": "",
+                "md5": "",
+                "sha1": "",
+                "sha256": "",
+                "certInfo": {
+                  "signer": "",
+                  "issuer": "",
+                  "trusted": "",
+                  "expired": ""
+                },
+                "size": "",
+                "arch": "",
+                "fsName": ""
+              },
+              "user": "",
+              "pid": "",
+              "startTime": "",
+              "ppid": "",
+              "pstartTime": "",
+              "userSID": "",
+              "privilegeLevel": "",
+              "noGui": "",
+              "logonId": ""
+            },
+            "eventType": "",
+            "data": {
+              "cmdLine": "",
+              "cmdLineArgs": [],
+              "_t": ""
+            }
+          }
+        ],
+        "nextPage": "",
+        "remainingItems": ""
+      }
+    },
+    {
+      "operation": "close_alert_by_id",
+      "title": "Close Alert By ID",
+      "annotation": "close_alert_by_id",
+      "description": "This action is used to close an existing alert.",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "alert_id",
+          "title": "Alert ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Specify the ID of the alert to close.",
+          "description": "Specify the ID of the alert to close."
+        },
+        {
+          "name": "malicious",
+          "title": "Malicious",
+          "type": "checkbox",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": false,
+          "tooltip": "If checked, it closes the alert and marks it as malicious.Note: If the alert is already closed, you can use the malicious parameter to reclassify the alert. By default this is set to false",
+          "description": "If checked, it closes the alert and marks it as malicious.Note: If the alert is already closed, you can use the malicious parameter to reclassify the alert. By default this is set to false"
+        }
+      ],
+      "output_schema": {
+        "alertId": "",
+        "closed": "",
+        "malicious": ""
+      }
+    },
+    {
+      "operation": "get_alert_by_id",
+      "title": "Get Alert By ID",
+      "annotation": "get_alert_by_id",
+      "description": "This action is used to retrieve details of a particular alert.",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "alert_id",
+          "title": "Alert ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Specify the ID of the alert to retrieve its details",
+          "description": "Specify the ID of the alert to retrieve its details"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "localId": "",
+        "endpointId": "",
+        "triggerCondition": "",
+        "endpoint": {
+          "id": "",
+          "machineId": "",
+          "osType": "",
+          "cpuVendor": "",
+          "arch": "",
+          "cpuDescr": "",
+          "kernel": "",
+          "os": "",
+          "name": "",
+          "domain": "",
+          "state": "",
+          "registrationTime": "",
+          "deregistrationTime": "",
+          "agentVersion": "",
+          "componentsVersions": [
+            {
+              "name": "",
+              "version": "",
+              "build": ""
+            }
+          ],
+          "isVirtualMachine": "",
+          "isDomainController": "",
+          "isServer": "",
+          "sessionStart": "",
+          "sessionEnd": "",
+          "lastSeenAt": "",
+          "disconnectionReason": "",
+          "localAddr": "",
+          "hvStatus": "",
+          "macs": [],
+          "isolated": "",
+          "connected": "",
+          "tags": [],
+          "groups": [
+            {
+              "id": "",
+              "name": "",
+              "description": "",
+              "parentGroupId": ""
+            }
+          ],
+          "avInstalled": "",
+          "avOnline": "",
+          "avDbLatestUpdateTime": "",
+          "avDbSignaturesNum": "",
+          "avAgentVersion": ""
+        },
+        "triggerEvents": [
+          {
+            "id": "",
+            "category": "",
+            "localId": "",
+            "endpointId": "",
+            "receivedAt": "",
+            "happenedAt": "",
+            "relevance": "",
+            "severity": "",
+            "trigger": "",
+            "manuallyAdded": "",
+            "process": {
+              "id": "",
+              "parentId": "",
+              "endpointId": "",
+              "program": {
+                "path": "",
+                "filename": "",
+                "md5": "",
+                "sha1": "",
+                "sha256": "",
+                "certInfo": {
+                  "signer": "",
+                  "issuer": "",
+                  "trusted": "",
+                  "expired": ""
+                },
+                "size": "",
+                "arch": "",
+                "fsName": ""
+              },
+              "user": "",
+              "pid": "",
+              "startTime": "",
+              "ppid": "",
+              "pstartTime": "",
+              "userSID": "",
+              "privilegeLevel": "",
+              "noGui": "",
+              "logonId": ""
+            },
+            "eventType": "",
+            "data": {
+              "additionalProp1": "",
+              "additionalProp2": "",
+              "additionalProp3": ""
+            }
+          }
+        ],
+        "totalEventCount": "",
+        "byTypeEventCount": [
+          {
+            "type": "",
+            "count": ""
+          }
+        ],
+        "impact": "",
+        "severity": "",
+        "closed": "",
+        "closedAt": "",
+        "activityState": "",
+        "terminationReason": "",
+        "receivedAt": "",
+        "happenedAt": "",
+        "tags": [],
+        "notes": "",
+        "endpointState": {
+          "osType": "",
+          "cpuVendor": "",
+          "arch": "",
+          "cpuDescr": "",
+          "kernel": "",
+          "os": "",
+          "hvStatus": "",
+          "name": "",
+          "domain": "",
+          "isolated": "",
+          "localAddr": "",
+          "macs": [],
+          "componentsVersions": [
+            {
+              "name": "",
+              "version": "",
+              "build": ""
+            }
+          ],
+          "endpointVersion": "",
+          "tags": [],
+          "groups": [
+            {
+              "id": "",
+              "name": "",
+              "description": "",
+              "parentGroupId": ""
+            }
+          ]
+        },
+        "alertStatus": "",
+        "title": ""
+      }
+    },
+    {
+      "operation": "add_notes_to_alert",
+      "title": "Add Notes To Alert",
+      "annotation": "add_notes_to_alert",
+      "description": "This action is used to add notes to an alert based on the alert ID provided",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "alert_id",
+          "title": "Alert ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Specify the alert ID to which you want to add notes",
+          "description": "Specify the alert ID to which you want to add notes"
+        },
+        {
+          "name": "notes",
+          "title": "Notes",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Specify the notes which you want to associate with the alert",
+          "description": "Specify the notes which you want to associate with the alert"
+        }
+      ],
+      "output_schema": {}
+    }
+  ]
+}
