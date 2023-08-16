@@ -9,7 +9,7 @@
   "category": "Endpoint Security",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/ibm-security-qradar-edr/651/ibm-security-qradar-edr-v1-0-0",
   "ingestion_supported": true,
   "ingestion_modes": [
     "scheduled"
@@ -23,7 +23,7 @@
         "editable": true,
         "visible": true,
         "required": true,
-        "description": "Specify the Hive server URL to which you will connect and perform the automated operations.",
+        "description": "Specify the Hive server URL to connect and perform the automated operations.",
         "placeholder": "https://<Hive Server URL>"
       },
       {
@@ -54,7 +54,7 @@
         "visible": true,
         "required": false,
         "value": true,
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not. \nBy default, this option is set as True. "
+        "description": "Specifies whether the SSL certificate for the server is to be verified. \nBy default, this option is set to True.  "
       }
     ]
   },
@@ -63,7 +63,7 @@
       "operation": "get_alert_list",
       "title": "Get Alert List",
       "annotation": "get_alert_list",
-      "description": "This action is used to retrieve all alerts generated in QRadar EDR",
+      "description": "Retrieves all alerts generated in QRadar EDR based on the Alert ID, Endpoint ID, trigger conditions, and other filter criteria that you have specified. ",
       "category": "investigation",
       "visible": true,
       "enabled": true,
@@ -75,8 +75,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify the IDs of the alerts to be retrieved, you can specify multiple IDs as comma separated values",
-          "description": "Specify the IDs of the alerts to be retrieved, you can specify multiple IDs as comma separated values"
+          "tooltip": "Specify the IDs of the alerts to be retrieved. You can specify multiple IDs as comma-separated values.",
+          "description": "Specify the IDs of the alerts to be retrieved. You can specify multiple IDs as comma-separated values."
         },
         {
           "name": "endpointId",
@@ -85,8 +85,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify the IDs of the endpoints where the alert was generated, you can specify multiple IDs as comma separated values",
-          "description": "Specify the IDs of the endpoints where the alert was generated, you can specify multiple IDs as comma separated values"
+          "tooltip": "Specify the IDs of the endpoints where the alert was generated. You can specify multiple IDs as comma-separated values.",
+          "description": "Specify the IDs of the endpoints where the alert was generated. You can specify multiple IDs as comma-separated values."
         },
         {
           "name": "triggerCondition",
@@ -111,8 +111,8 @@
             "Detection Strategy",
             "Antimalware Detection"
           ],
-          "tooltip": "Select the trigger condition of the alert",
-          "description": "Select the trigger condition of the alert"
+          "tooltip": "Select the trigger conditions of the alert. You can select one or more of the following options: Code Injection, Process Impersonated, Signature Forged, etc.",
+          "description": "Select the trigger conditions of the alert. You can select one or more of the following options: Code Injection, Process Impersonated, Signature Forged, etc."
         },
         {
           "name": "tag",
@@ -121,8 +121,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify tags based on which you want to filter alerts, you can specify multiple tags as comma separated values",
-          "description": "Specify tags based on which you want to filter alerts, you can specify multiple tags as comma separated values"
+          "tooltip": "Specify tags based on which to filter alerts. You can specify multiple tags as comma-separated values.",
+          "description": "Specify tags based on which to filter alerts. You can specify multiple tags as comma-separated values."
         },
         {
           "name": "activityState",
@@ -137,8 +137,8 @@
             "Inactive",
             "Archived"
           ],
-          "tooltip": "Select the activity state based on which you want to filter alerts",
-          "description": "Select the activity state based on which you want to filter alerts"
+          "tooltip": "Select the activity state based on which to filter alerts. You can select one of the following options: Active, Idle, Inactive or Archived",
+          "description": "Select the activity state based on which to filter alerts. You can select one of the following options: Active, Idle, Inactive or Archived"
         },
         {
           "name": "severity",
@@ -153,8 +153,8 @@
             "Medium",
             "High"
           ],
-          "tooltip": "Select the severity based on which you want to filter alerts",
-          "description": "Select the severity based on which you want to filter alerts"
+          "tooltip": "Select the severity based on which to filter alerts. You can select one or more of the following options: Safe, Low, Medium and High",
+          "description": "Select the severity based on which to filter alerts. You can select one or more of the following options: Safe, Low, Medium and High"
         },
         {
           "name": "status",
@@ -168,8 +168,8 @@
             "Benign",
             "None"
           ],
-          "tooltip": "Select the status based on which you want to filter alerts",
-          "description": "Select the status based on which you want to filter alerts"
+          "tooltip": "Select the status based on which to filter alerts. You can select one or more of the following options: Malicious, Benign and None",
+          "description": "Select the status based on which to filter alerts. You can select one or more of the following options: Malicious, Benign and None"
         },
         {
           "name": "happenedAfter",
@@ -178,8 +178,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the alert happened after the provided date",
-          "description": "Fetches the alert happened after the provided date"
+          "tooltip": "Select the start date of the duration, during which the alerts occurred, to filter the alert list.",
+          "description": "Select the start date of the duration, during which the alerts occurred, to filter the alert list."
         },
         {
           "name": "happenedBefore",
@@ -188,8 +188,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the alert happened before the provided date",
-          "description": "Fetches the alert happened before the provided date"
+          "tooltip": "Select the end date of the duration, during which the alerts occurred, to filter the alert list.",
+          "description": "Select the end date of the duration, during which the alerts occurred, to filter the alert list."
         },
         {
           "name": "receivedAfter",
@@ -198,8 +198,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the alert received after the provided date",
-          "description": "Fetches the alert received after the provided date"
+          "tooltip": "Select the start date of the duration, during which the alerts were received, to filter the alert list.",
+          "description": "Select the start date of the duration, during which the alerts were received, to filter the alert list."
         },
         {
           "name": "receivedBefore",
@@ -208,8 +208,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the alert received before the provided date",
-          "description": "Fetches the alert received before the provided date"
+          "tooltip": "Select the end date of the duration, during which the alerts were received, to filter the alert list.",
+          "description": "Select the end date of the duration, during which the alerts were received, to filter the alert list."
         },
         {
           "name": "closedAfter",
@@ -218,8 +218,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the alert closed after the provided date",
-          "description": "Fetches the alert closed after the provided date"
+          "tooltip": "Select the start date of the duration, during which the alerts were closed, to filter the alert list. ",
+          "description": "Select the start date of the duration, during which the alerts were closed, to filter the alert list. "
         },
         {
           "name": "closedBefore",
@@ -228,8 +228,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the alert closed before the provided date",
-          "description": "Fetches the alert closed before the provided date"
+          "tooltip": "Select the end date of the duration, during which the alerts were closed, to filter the alert list. ",
+          "description": "Select the end date of the duration, during which the alerts were closed, to filter the alert list. "
         },
         {
           "name": "lastChangedAfter",
@@ -238,8 +238,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the alert that has been changed last after the given date",
-          "description": "Fetches the alert that has been changed last after the given date"
+          "tooltip": "Select the start date of the duration, during which the alerts were modified, to filter the alert list. ",
+          "description": "Select the start date of the duration, during which the alerts were modified, to filter the alert list. "
         },
         {
           "name": "lastChangedBefore",
@@ -248,8 +248,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the alert that has been changed last before the given date",
-          "description": "Fetches the alert that has been changed last before the given date"
+          "tooltip": "Select the end date of the duration, during which the alerts were modified, to filter the alert list. ",
+          "description": "Select the end date of the duration, during which the alerts were modified, to filter the alert list. "
         },
         {
           "name": "country",
@@ -258,8 +258,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filters the alerts that contains connection events to the given countries. Use lowercased alpha-2 country codes, e.g., \"it\" for Italy. You can specify multiple country as comma separated values",
-          "description": "Filters the alerts that contains connection events to the given countries. Use lowercased alpha-2 country codes, e.g., \"it\" for Italy. You can specify multiple country as comma separated values"
+          "tooltip": "Specify a lowercase alpha-2 country code to filter the alerts containing connection events to the specified countries. For example, the lowercase alpha-2 code for Italy is it. You can specify multiple country codes as comma-separated values. ",
+          "description": "Specify a lowercase alpha-2 country code to filter the alerts containing connection events to the specified countries. For example, the lowercase alpha-2 code for Italy is it. You can specify multiple country codes as comma-separated values. "
         },
         {
           "name": "gid",
@@ -268,8 +268,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify group IDs to which the endpoint on which the alert was generated belongs, you can specify multiple group IDs as comma separated values",
-          "description": "Specify group IDs to which the endpoint on which the alert was generated belongs, you can specify multiple group IDs as comma separated values"
+          "tooltip": "Specify the group IDs to which the endpoint, on which the alert was generated, belongs. You can specify multiple group IDs as comma-separated values.",
+          "description": "Specify the group IDs to which the endpoint, on which the alert was generated, belongs. You can specify multiple group IDs as comma-separated values."
         },
         {
           "name": "count",
@@ -278,8 +278,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify the number of alerts to return in a single page",
-          "description": "Specify the number of alerts to return in a single page"
+          "tooltip": "Specify the count of alerts to return in a single page.",
+          "description": "Specify the count of alerts to return in a single page."
         },
         {
           "name": "lastSeenId",
@@ -288,8 +288,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "This automatically sorts alerts by id in ascending order and returns those with an id strictly greater than the provided one.",
-          "description": "This automatically sorts alerts by id in ascending order and returns those with an id strictly greater than the provided one."
+          "tooltip": "Specify an ID to sort alerts by ID in ascending order and return alerts with an ID greater than the provided one. ",
+          "description": "Specify an ID to sort alerts by ID in ascending order and return alerts with an ID greater than the provided one. "
         },
         {
           "name": "get_all_records",
@@ -299,8 +299,8 @@
           "visible": true,
           "required": false,
           "value": true,
-          "tooltip": "If checked, it fetches all the records present, By default this is set to true",
-          "description": "If checked, it fetches all the records present, By default this is set to true"
+          "tooltip": "Select to retrieve all records present. By default, this is set to true. ",
+          "description": "Select to retrieve all records present. By default, this is set to true. "
         }
       ],
       "output_schema": {
@@ -469,7 +469,7 @@
       "operation": "get_events_related_to_alerts",
       "title": "Get Events Related To Alerts",
       "annotation": "get_events_related_to_alerts",
-      "description": "This action is used to retrieve all events related to alerts generated in QRadar EDR",
+      "description": "Retrieves all events related to alerts generated in QRadar EDR based on the alert ID, process ID and other input parameters that you have specified. ",
       "category": "investigation",
       "visible": true,
       "enabled": true,
@@ -481,8 +481,8 @@
           "editable": true,
           "visible": true,
           "required": true,
-          "tooltip": "Specify the ID of the alerts whose events to be retrieved.",
-          "description": "Specify the ID of the alerts whose events to be retrieved."
+          "tooltip": "Specify the alert ID whose associated events you want to retrieve.",
+          "description": "Specify the alert ID whose associated events you want to retrieve."
         },
         {
           "name": "processId",
@@ -491,8 +491,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify the process ID to filter events",
-          "description": "Specify the process ID to filter events"
+          "tooltip": "Specify the process ID based on which to filter retrieved events.",
+          "description": "Specify the process ID based on which to filter retrieved events."
         },
         {
           "name": "processPid",
@@ -501,8 +501,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify the process PID to filter events, you can specify multiple process PID as comma separated values",
-          "description": "Specify the process PID to filter events, you can specify multiple process PID as comma separated values"
+          "tooltip": "Specify the process PID based on which to filter retrieved events. You can specify multiple process PID as comma-separated values.",
+          "description": "Specify the process PID based on which to filter retrieved events. You can specify multiple process PID as comma-separated values."
         },
         {
           "name": "eventType",
@@ -511,8 +511,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify events type based on which you want to filter events, you can specify multiple events types as comma separated values",
-          "description": "Specify events type based on which you want to filter events, you can specify multiple events types as comma separated values"
+          "tooltip": "Specify events type based on which to filter retrieved events. You can specify multiple events types as comma-separated values.",
+          "description": "Specify events type based on which to filter retrieved events. You can specify multiple events types as comma-separated values."
         },
         {
           "name": "severity",
@@ -527,8 +527,8 @@
             "Medium",
             "High"
           ],
-          "tooltip": "Select the severity based on which you want to filter events",
-          "description": "Select the severity based on which you want to filter events"
+          "tooltip": "Select the severity based on which to filter retrieved events. You can select one or more of the following options: None, Low, Medium and High",
+          "description": "Select the severity based on which to filter retrieved events. You can select one or more of the following options: None, Low, Medium and High"
         },
         {
           "name": "happenedAfter",
@@ -537,8 +537,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the events happened after the provided date",
-          "description": "Fetches the events happened after the provided date"
+          "tooltip": "Select the start date of the duration, during which the events occurred, to filter the events list. ",
+          "description": "Select the start date of the duration, during which the events occurred, to filter the events list. "
         },
         {
           "name": "happenedBefore",
@@ -547,8 +547,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Fetches the events happened before the provided date",
-          "description": "Fetches the events happened before the provided date"
+          "tooltip": "Select the end date of the duration, during which the events occurred, to filter the events list. ",
+          "description": "Select the end date of the duration, during which the events occurred, to filter the events list. "
         },
         {
           "name": "country",
@@ -557,8 +557,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filters the events that have the specified country code. Use lowercased alpha-2 country codes, e.g., \"it\" for Italy. You can specify multiple country as comma separated values",
-          "description": "Filters the events that have the specified country code. Use lowercased alpha-2 country codes, e.g., \"it\" for Italy. You can specify multiple country as comma separated values"
+          "tooltip": "Specify a lowercase alpha-2 country code to filter the events containing the specified countries. For example, the lowercase alpha-2 code for Italy is it. You can specify multiple country codes as comma-separated values.",
+          "description": "Specify a lowercase alpha-2 country code to filter the events containing the specified countries. For example, the lowercase alpha-2 code for Italy is it. You can specify multiple country codes as comma-separated values."
         },
         {
           "name": "mitreTechnique",
@@ -567,8 +567,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filters the events that have the specified mitre technique.You can specify multiple mitre technique as comma separated values",
-          "description": "Filters the events that have the specified mitre technique.You can specify multiple mitre technique as comma separated values"
+          "tooltip": "Specify the MITRE technique IDs to filter the events associated with the specified MITRE technique. You can specify multiple MITRE techniques as comma-separated values.",
+          "description": "Specify the MITRE technique IDs to filter the events associated with the specified MITRE technique. You can specify multiple MITRE techniques as comma-separated values."
         },
         {
           "name": "gid",
@@ -577,8 +577,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify group ID to return events if the alert belongs to an endpoint that is in the group with the given id. , you can specify multiple group IDs as comma separated values",
-          "description": "Specify group ID to return events if the alert belongs to an endpoint that is in the group with the given id. , you can specify multiple group IDs as comma separated values"
+          "tooltip": "Specify the group IDs to which the endpoint, associated with the event, belongs. You can specify multiple group IDs as comma-separated values.",
+          "description": "Specify the group IDs to which the endpoint, associated with the event, belongs. You can specify multiple group IDs as comma-separated values."
         },
         {
           "name": "get_all_records",
@@ -588,8 +588,8 @@
           "visible": true,
           "required": false,
           "value": true,
-          "tooltip": "If checked, it fetches all the records present, By default this is set to true",
-          "description": "If checked, it fetches all the records present, By default this is set to true"
+          "tooltip": "Select to retrieve all records present. By default, this is set to true.",
+          "description": "Select to retrieve all records present. By default, this is set to true."
         }
       ],
       "output_schema": {
@@ -651,7 +651,7 @@
       "operation": "close_alert_by_id",
       "title": "Close Alert By ID",
       "annotation": "close_alert_by_id",
-      "description": "This action is used to close an existing alert.",
+      "description": "Closes an existing alert in QRadar EDR based on the alert ID that you have specified.",
       "category": "investigation",
       "visible": true,
       "enabled": true,
@@ -663,8 +663,8 @@
           "editable": true,
           "visible": true,
           "required": true,
-          "tooltip": "Specify the ID of the alert to close.",
-          "description": "Specify the ID of the alert to close."
+          "tooltip": "Specify the alert ID to close.",
+          "description": "Specify the alert ID to close."
         },
         {
           "name": "malicious",
@@ -674,8 +674,8 @@
           "visible": true,
           "required": false,
           "value": false,
-          "tooltip": "If checked, it closes the alert and marks it as malicious.Note: If the alert is already closed, you can use the malicious parameter to reclassify the alert. By default this is set to false",
-          "description": "If checked, it closes the alert and marks it as malicious.Note: If the alert is already closed, you can use the malicious parameter to reclassify the alert. By default this is set to false"
+          "tooltip": "Select to close the alert and mark it as malicious. By default, this is set to false.  \n\nNOTE: If the alert is already closed. You can use the this parameter to reclassify the alert. ",
+          "description": "Select to close the alert and mark it as malicious. By default, this is set to false.  \n\nNOTE: If the alert is already closed. You can use the this parameter to reclassify the alert. "
         }
       ],
       "output_schema": {
@@ -688,7 +688,7 @@
       "operation": "get_alert_by_id",
       "title": "Get Alert By ID",
       "annotation": "get_alert_by_id",
-      "description": "This action is used to retrieve details of a particular alert.",
+      "description": "Retrieves details of an alert in QRadar EDR based on the alert ID that you have specified.",
       "category": "investigation",
       "visible": true,
       "enabled": true,
@@ -700,8 +700,8 @@
           "editable": true,
           "visible": true,
           "required": true,
-          "tooltip": "Specify the ID of the alert to retrieve its details",
-          "description": "Specify the ID of the alert to retrieve its details"
+          "tooltip": "Specify the alert ID to retrieve its details. ",
+          "description": "Specify the alert ID to retrieve its details. "
         }
       ],
       "output_schema": {
@@ -864,7 +864,7 @@
       "operation": "add_notes_to_alert",
       "title": "Add Notes To Alert",
       "annotation": "add_notes_to_alert",
-      "description": "This action is used to add notes to an alert based on the alert ID provided",
+      "description": "Add a note to an alert in QRadar EDR based on the alert ID that you have specified. ",
       "category": "investigation",
       "visible": true,
       "enabled": true,
@@ -876,8 +876,8 @@
           "editable": true,
           "visible": true,
           "required": true,
-          "tooltip": "Specify the alert ID to which you want to add notes",
-          "description": "Specify the alert ID to which you want to add notes"
+          "tooltip": "Specify the alert ID to which to add notes.",
+          "description": "Specify the alert ID to which to add notes."
         },
         {
           "name": "notes",
@@ -886,8 +886,8 @@
           "editable": true,
           "visible": true,
           "required": true,
-          "tooltip": "Specify the notes which you want to associate with the alert",
-          "description": "Specify the notes which you want to associate with the alert"
+          "tooltip": "Specify the note to associate with the specified alert.",
+          "description": "Specify the note to associate with the specified alert."
         }
       ],
       "output_schema": {}
